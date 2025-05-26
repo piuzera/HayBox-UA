@@ -16,34 +16,31 @@
 Config config = default_config;
 
 GpioButtonMapping button_mappings[] = {
-    { BTN_LF1, 2  },
-    { BTN_LF2, 3  },
-    { BTN_LF3, 4  },
-    { BTN_LF4, 7  },
-    { BTN_LF5, 1  },
+    { BTN_LF1, 2  }, // GP2: RIGHT
+    { BTN_LF2, 3  }, // GP3: DOWN
+    { BTN_LF3, 4  }, // GP4: LEFT
+    { BTN_LF4, 6  }, // GP5: L -> MOD_X
 
-    { BTN_LT1, 6  },
-    { BTN_LT2, 17 },
+    { BTN_LT1, 17  }, // GP6: MOD_X -> UP
+    { BTN_LT2, 27  }, // GP7: MOD_Y -> R
 
-    { BTN_MB1, 0  },
-    { BTN_MB2, 10 },
-    { BTN_MB3, 11 },
+    { BTN_MB1, 0  }, // GP0: START
 
-    { BTN_RT1, 14 },
-    { BTN_RT2, 15 },
-    { BTN_RT3, 13 },
-    { BTN_RT4, 12 },
-    { BTN_RT5, 16 },
+    { BTN_RT1, 14 }, // GP14: A
+    { BTN_RT2, 15 }, // GP15: C_DOWN
+    { BTN_RT3, 13 }, // GP13: C_LEFT
+    { BTN_RT4, 12 }, // GP12: C_UP
+    { BTN_RT5, 16 }, // GP16: C_RIGHT
 
-    { BTN_RF1, 19 },
-    { BTN_RF2, 21 },
-    { BTN_RF3, 26 },
-    { BTN_RF4, 20 },
+    { BTN_RF1, 26 }, // GP26: B
+    { BTN_RF2, 19 }, // GP21: X -> Z
+    { BTN_RF3, 21 }, // GP19: Z -> X
+    { BTN_RF4, 18 }, // GP17: UP -> MS
 
-    { BTN_RF5, 27 },
-    { BTN_RF6, 22 },
-    { BTN_RF7, 5 },
-    { BTN_RF8, 18 },
+    { BTN_RF5, 5 }, // GP27: R -> L
+    { BTN_RF6, 22 }, // GP22: Y
+    { BTN_RF7, 20 }, // GP20: LS
+    { BTN_RF8, 7 }, // GP18: MS -> MOD_Y
 };
 const size_t button_count = sizeof(button_mappings) / sizeof(GpioButtonMapping);
 

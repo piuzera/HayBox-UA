@@ -15,8 +15,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - env: pico
-            bin_ext: uf2
           - env: pico-morphales
             bin_ext: uf2
 
