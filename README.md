@@ -127,6 +127,8 @@ If you are adding a new device config/PlatformIO environment, you will have to a
 
 ### Default button holds
 
+<img width="1492" height="830" alt="image" src="https://github.com/user-attachments/assets/1725b3db-f5d6-4dd0-8883-70178bb9690f" />
+
 #### Config mode
 
 To enter config mode (Pico-based devices only), hold MB1 (Start) on plugin.
