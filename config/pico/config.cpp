@@ -15,38 +15,39 @@
 
 Config config = default_config;
 
-
 GpioButtonMapping button_mappings[] = {
     // LEFT HAND
-    { BTN_LF1, 2  },  // Right
+    { BTN_LF4, 0  },  // L Shield
+    { BTN_LF3, 1  },  // Left
+    { BTN_RF4, 2  },  // Up
     { BTN_LF2, 3  },  // Down
-    { BTN_LF3, 4  },  // Left
-    { BTN_LF4, 5  },  // LT (L)
-
-    // LEFT THUMB
-    { BTN_LT1, 6  },  // MX (Modifier X)
-    { BTN_LT2, 7  },  // MY (Modifier Y)
+    { BTN_LF1, 4  },  // Right
 
     // CENTER
-    { BTN_MB1, 0  },  // ST (Start)
+    { BTN_MB1, 5  },  // Start
+
+    // LEFT THUMB
+    { BTN_LT1, 6  },  // MX
+    { BTN_LT2, 7  },  // MY
 
     // RIGHT THUMB
-    { BTN_RT1, 14 },  // A
-    { BTN_RT2, 15 },  // C-Down
-    { BTN_RT3, 13 },  // C-Left
-    { BTN_RT4, 12 },  // C-Up
-    { BTN_RT5, 16 },  // C-Right
+    { BTN_RT2, 8  },  // C-Down
+    { BTN_RT3, 9  },  // C-Left
+    { BTN_RF1, 10 },  // B
+    { BTN_RT4, 11 },  // C-Up
+    { BTN_RT5, 12 },  // C-Right
+    { BTN_RT1, 13 },  // A
 
     // RIGHT HAND
-    { BTN_RF1, 11 },  // B
-    { BTN_RF2, 21 },  // X
-    { BTN_RF3, 19 },  // Z
-    { BTN_RF4, 17 },  // Up
-    { BTN_RF5, 1  },  // RT (R)
-    { BTN_RF6, 22 },  // Y
-    { BTN_RF7, 20 },  // LS (Light Shield)
-    { BTN_RF8, 18 },  // MS (Mid Shield)
+    { BTN_RF5, 14 },  // R Shield
+    { BTN_RF2, 15 },  // X
+    { BTN_RF3, 16 },  // Z
+    { BTN_MB4, 17 },  // D-Pad Toggle
+    { BTN_RF6, 18 },  // Y
+    { BTN_RF8, 19 },  // Mid Shield
+    { BTN_RF7, 20 },  // Light Shield
 };
+
 
 const size_t button_count = sizeof(button_mappings) / sizeof(GpioButtonMapping);
 
@@ -118,8 +119,30 @@ void setup1() {
     }
 }
 
+
 void loop1() {
     if (backends != nullptr) {
-        gpio_input.UpdateInputs(backends[0]->GetInputs());
+        auto &inputs = backends[0]->GetInputs();
+
+        // Read all physical buttons (including GPIO17)
+        gpio_input.UpdateInputs(inputs);
+
+        // Persistent toggle state
+        static bool last_pressed = false;
+        static bool dpad_enabled = false;
+
+        // GPIO17 is mapped to BTN_MB4
+        const bool pressed = inputs.mb4;
+
+        // Toggle only on a new button press
+        if (pressed && !last_pressed) {
+            dpad_enabled = !dpad_enabled;
+        }
+
+        last_pressed = pressed;
+
+        // Activate Melee's existing D-pad layer
+        inputs.nunchuk_c = dpad_enabled;
     }
 }
+
