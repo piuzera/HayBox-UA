@@ -15,36 +15,39 @@
 
 Config config = default_config;
 
+
 GpioButtonMapping button_mappings[] = {
-    { BTN_LF1, 2  }, // GP2: RIGHT
-    { BTN_LF2, 3  }, // GP3: DOWN
-    { BTN_LF3, 4  }, // GP4: LEFT
-    { BTN_LF4, 5  }, // GP5: L
-    { BTN_LF5, 1  }, // GP1: START - UNUSED
+    // LEFT HAND
+    { BTN_LF1, 2  },  // Right
+    { BTN_LF2, 3  },  // Down
+    { BTN_LF3, 4  },  // Left
+    { BTN_LF4, 5  },  // LT (L)
 
-    { BTN_LT1, 6  }, // GP6: MOD_X
-    { BTN_LT2, 7  }, // GP7: MOD_Y
+    // LEFT THUMB
+    { BTN_LT1, 6  },  // MX (Modifier X)
+    { BTN_LT2, 7  },  // MY (Modifier Y)
 
-    { BTN_MB1, 0  }, // GP0: START
-    { BTN_MB2, 10 }, // GP10: C_UP - UNUSED
-    { BTN_MB3, 11 }, // GP11: C_LEFT - UNUSED
+    // CENTER
+    { BTN_MB1, 0  },  // ST (Start)
 
-    { BTN_RT1, 14 }, // GP14: A
-    { BTN_RT2, 15 }, // GP15: C_DOWN
-    { BTN_RT3, 13 }, // GP13: C_LEFT
-    { BTN_RT4, 12 }, // GP12: C_UP
-    { BTN_RT5, 16 }, // GP16: C_RIGHT
+    // RIGHT THUMB
+    { BTN_RT1, 14 },  // A
+    { BTN_RT2, 15 },  // C-Down
+    { BTN_RT3, 13 },  // C-Left
+    { BTN_RT4, 12 },  // C-Up
+    { BTN_RT5, 16 },  // C-Right
 
-    { BTN_RF1, 26 }, // GP26: B
-    { BTN_RF2, 21 }, // GP21: X
-    { BTN_RF3, 19 }, // GP19: Z
-    { BTN_RF4, 17 }, // GP17: UP
-
-    { BTN_RF5, 27 }, // GP27: R
-    { BTN_RF6, 22 }, // GP22: Y
-    { BTN_RF7, 20 }, // GP20: LS
-    { BTN_RF8, 18 }, // GP18: MS
+    // RIGHT HAND
+    { BTN_RF1, 11 },  // B
+    { BTN_RF2, 21 },  // X
+    { BTN_RF3, 19 },  // Z
+    { BTN_RF4, 17 },  // Up
+    { BTN_RF5, 1  },  // RT (R)
+    { BTN_RF6, 22 },  // Y
+    { BTN_RF7, 20 },  // LS (Light Shield)
+    { BTN_RF8, 18 },  // MS (Mid Shield)
 };
+
 const size_t button_count = sizeof(button_mappings) / sizeof(GpioButtonMapping);
 
 DebouncedGpioButtonInput<button_count> gpio_input(button_mappings);
